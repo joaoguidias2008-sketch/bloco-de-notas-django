@@ -8,5 +8,18 @@
 <body>
     <h1>Meu Bloco de Notas</h1>
     <p>Um lugar simples para guardar suas anotações.</p>
+
+    {% if user.is_authenticated %}
+        <p>Você está logado como {{ user.first_name }}.</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Sair</button>
+        </form>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Entrar</a> ou
+            <a href="{% url 'cadastro' %}">Criar conta</a>
+        </p>
+    {% endif %}
 </body>
 </html>
